@@ -25,6 +25,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Service
@@ -115,5 +116,13 @@ public class LeadService {
         return leadsRepository.findAll(pageable).map(l->classConversion.leadsEntityToDto(l));
     }
 
+    public LeadsDto updateStatusOfALeadInDB(Long id, Map<String,Boolean> isVerified)
+    {
+        Leads lead = leadsRepository.findById(id).orElseThrow(()->new NoSuchElementException("No such lead with id exists!"));
 
+        isVerified.forEach((k,v)->lead.setIsVerified(v));
+
+        leadsRepository.save(lead);
+        return classConversion.leadsEntityToDto(lead);
+    }
 }

@@ -24,6 +24,8 @@ public class TestDrive {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User userId;
+
+
     private LocalDateTime dateAndTimeOfTestDrive;
 
     @ManyToOne

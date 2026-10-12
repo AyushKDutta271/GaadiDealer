@@ -46,7 +46,10 @@ public class CarController {
 
 
     @PostMapping("/sell")
-    public ResponseEntity<VehicleDto> sellVehicle(@RequestParam("carPlateNo") String carPlateNo,
+
+    public ResponseEntity<VehicleDto> sellVehicle(
+                                                  @RequestParam("carId") Long carId,
+                                                  @RequestParam("carPlateNo") String carPlateNo,
                                                   @RequestParam("carBrand") String carBrand,
                                                   @RequestParam("userId") Long userId,
                                                   @RequestParam("state") String state,
@@ -56,6 +59,7 @@ public class CarController {
     {
         VehicleDto vehicleDto = new VehicleDto();
         vehicleDto.setCarImages(vehicleService.encodeImagesToStringUrl(carImages));
+        vehicleDto.setId(carId);
         vehicleDto.setCarPlateNo(carPlateNo);
         vehicleDto.setCarBrand(carBrand);
         vehicleDto.setUserId(userId);

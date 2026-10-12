@@ -1,6 +1,7 @@
 package com.MarketConnect.GaadiDealer.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,11 +21,19 @@ public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+
+
     private String carPlateNo;
+
+
     private String carBrand;
+
+
     @OneToOne
     @JoinColumn(name = "owner_id")
     private User carOwner;
+
 
     @OneToMany(mappedBy ="testCarId")
     private TestDrive testDriveId;
@@ -34,8 +43,14 @@ public class Vehicle {
 
 
     private String state;
+
+
     private String city;
+
+
     private List<String> carImages;
+
+
     private Double carPrice;
 
     @CreatedDate

@@ -1,13 +1,7 @@
 package com.MarketConnect.GaadiDealer.classconversions;
 
-import com.MarketConnect.GaadiDealer.dtos.LeadsDto;
-import com.MarketConnect.GaadiDealer.dtos.TestDriveDto;
-import com.MarketConnect.GaadiDealer.dtos.UserDto;
-import com.MarketConnect.GaadiDealer.dtos.VehicleDto;
-import com.MarketConnect.GaadiDealer.entities.Leads;
-import com.MarketConnect.GaadiDealer.entities.TestDrive;
-import com.MarketConnect.GaadiDealer.entities.User;
-import com.MarketConnect.GaadiDealer.entities.Vehicle;
+import com.MarketConnect.GaadiDealer.dtos.*;
+import com.MarketConnect.GaadiDealer.entities.*;
 
 import com.MarketConnect.GaadiDealer.repositories.UserRepository;
 import com.MarketConnect.GaadiDealer.repositories.VehicleRepository;
@@ -32,7 +26,7 @@ public class ClassConversion {
 
     public UserDto userToUserDto(User user)
     {
-        return new UserDto(user.getFullName(),user.getEmailId(),user.getPassword(),user.getConfirmPassword(),user.getUserState(),user.getUserCity(),user.getUserType());
+        return new UserDto(user.getId(),user.getFullName(),user.getEmailId(),user.getPassword(),user.getConfirmPassword(),user.getUserState(),user.getUserCity(),user.getUserType());
     }
 
     public Vehicle vehicleDtoToVehicleEntity(VehicleDto vehicle)
@@ -43,7 +37,7 @@ public class ClassConversion {
 
     public VehicleDto vehicleToVehicleDto(Vehicle vehicle)
     {
-        return new VehicleDto(vehicle.getCarPlateNo(),vehicle.getCarBrand(),vehicle.getCarOwner().getId(),vehicle.getState(),vehicle.getCity(),vehicle.getCarImages(),vehicle.getCarPrice());
+        return new VehicleDto(vehicle.getId(), vehicle.getCarPlateNo(),vehicle.getCarBrand(),vehicle.getCarOwner().getId(),vehicle.getState(),vehicle.getCity(),vehicle.getCarImages(),vehicle.getCarPrice());
     }
 
     public TestDrive testDriveDtoToEntity(TestDriveDto testDriveDto)
@@ -55,7 +49,7 @@ public class ClassConversion {
 
     public TestDriveDto testDriveEntityToDto(TestDrive testDrive)
     {
-        return new TestDriveDto(testDrive.getUserId().getId(),testDrive.getDateAndTimeOfTestDrive(),testDrive.getTestCarId().getId(),testDrive.getCity(),testDrive.getIsDone());
+        return new TestDriveDto(testDrive.getId(),testDrive.getUserId().getId(),testDrive.getDateAndTimeOfTestDrive(),testDrive.getTestCarId().getId(),testDrive.getCity(),testDrive.getIsDone());
     }
 
     public Leads leadsDtoToLeadsEntity(LeadsDto leadsDto)
@@ -67,6 +61,16 @@ public class ClassConversion {
 
     public LeadsDto leadsEntityToDto(Leads leads)
     {
-        return new LeadsDto(leads.getUserId().getId(),leads.getCarId().getId(),leads.getBuy(),leads.getUploadedDoc(),leads.getIsVerified(),leads.getIsPaymentDone());
+        return new LeadsDto(leads.getId(), leads.getUserId().getId(),leads.getCarId().getId(),leads.getBuy(),leads.getUploadedDoc(),leads.getIsVerified(),leads.getIsPaymentDone());
+    }
+
+    public Contacts contactsToContactsEntity(ContactsDto contacts)
+    {
+        return new Contacts(contacts.getId(), contacts.getUserId(), contacts.getCarPlateNo(), contacts.getPaidPrice());
+    }
+
+    public ContactsDto contactsEntityToDto(Contacts contacts)
+    {
+        return new ContactsDto(contacts.getId(), contacts.getUserId(), contacts.getCarPlateNo(), contacts.getPaidPrice());
     }
 }

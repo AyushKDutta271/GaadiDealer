@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/leads")
@@ -62,5 +63,9 @@ public class LeadsController {
             return ResponseEntity.status(HttpStatus.OK).body(leadService.getLeadsFromDb(pageable));
         }
 
-
+        @PatchMapping("/updateStatus/{id}")
+        public ResponseEntity<LeadsDto> updateStatusOfALead(@PathVariable Long id, @RequestBody Map<String,Boolean> isVerified)
+        {
+            return ResponseEntity.status(HttpStatus.OK).body(leadService.updateStatusOfALeadInDB(id,isVerified));
+        }
 }
