@@ -32,6 +32,8 @@ public class User {
 
     @OneToOne(mappedBy = "userId")
     private Leads leadId;
+
+
     private String userState;
     private String userCity;
     private UserType userType;

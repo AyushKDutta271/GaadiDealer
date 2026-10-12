@@ -31,6 +31,8 @@ public class Vehicle {
 
     @OneToMany(mappedBy = "carId")
     private Leads leadId;
+
+
     private String state;
     private String city;
     private List<String> carImages;
