@@ -1,0 +1,53 @@
+.homeUser-body{
+    background: linear-gradient(135deg, #05070f 0%, #0b1026 45%, #131a3a 100%);
+  color: #e6f1ff;
+  height:fit-content;
+  
+}
+
+p:hover{
+    color:pink
+}
+
+#welcome-heading{
+    color:mediumvioletred
+}
+
+
+#welcome-heading:hover{
+    color:aqua
+}
+
+strong:hover{
+color:orange
+}
+
+.navLogo{
+    background:#33ccff;
+    box-shadow: 10px,20px,30px,13px, rgb(92, 7, 36);
+    font-family:"Atomic Age";
+    padding:2%;
+    border-radius:15%
+}
+
+nav{
+    background-color:#cce0ff;
+    border-bottom: 5px solid rgba(10,30,100,0.5);
+    
+}
+
+.home-content-body{
+    width:100%;
+    position: relative;
+    border: 2px solid black;
+    height:fit-content;
+    
+}
+
+.footer-body{
+    display:flex;
+    justify-content: space-between;
+    margin-top: 10%;
+    margin-bottom: 0;
+    height: fit-content;
+}
