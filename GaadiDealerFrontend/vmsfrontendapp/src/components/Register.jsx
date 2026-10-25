@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-
+import { Link } from 'react-router-dom';
+// import '../assets/componentscss/SellVehicle.css'
 const Register = () => {
     const [formInputs,setFormInputs]=useState({
         'fullname':'',
@@ -141,7 +142,9 @@ const Register = () => {
     }
   return (
     <>
-        <form>
+      <div className='homeUser-body' style={{height:'900px',marginTop:0}}>
+        <h3 align='center'>User Register:</h3>
+        <form className='form-body'>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Full Name</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1" name='fullname' value={formInputs.fullname} onChange={formInputsHandler}/>
@@ -197,8 +200,11 @@ const Register = () => {
                 <div>{
                         errors.userTypeError?errors.userTypeError:null
                     }</div>
-
-                    <button type='submit' onClick={submitHandler}>Register</button>
+                <div style={{width:"70%",height:'50px',margin:"10% auto", display:'flex',justifyContent:'space-evenly'}}>
+                    <button type='submit' className=' btn btn-primary' style={{width:'100%'}} onClick={submitHandler}>Register</button>
+                     <h6 align='right' style={{marginTop:'0%'}}>Already a user?<Link to='/login'>Login</Link></h6>
+                </div>
+                    
         </form>
         {
             finalError?<h3>{finalError}</h3>:null
@@ -206,6 +212,7 @@ const Register = () => {
         {
             successMessage?<h3>{successMessage}</h3>:null
         }
+      </div>
     </>
   )
 }

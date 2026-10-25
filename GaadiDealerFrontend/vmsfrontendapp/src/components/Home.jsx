@@ -16,7 +16,12 @@ const Home = () => {
    )
 
    const fetchLoggedInUser=async ()=>{
-    const fetchedUser=await instance.get('/me');
+    const fetchedEmailId=await instance.get('/me');
+    const fetchedUser=await instance.get('/users/getUserByEmailId',{
+        params:{
+            emailId:fetchedEmailId.data
+        }
+    });
     setCurrentUser(fetchedUser.data);
    }
    if(currentUser)console.log("currentUser: ",currentUser);
@@ -24,7 +29,7 @@ const Home = () => {
     <>
     {
         currentUser?
-            currentUser==='USER'?<HomeUser/>:<HomeAdmin/>
+            currentUser.userType==='USER'?<HomeUser/>:<HomeAdmin/>
             :
             <p>Loading please wait...</p>
     }

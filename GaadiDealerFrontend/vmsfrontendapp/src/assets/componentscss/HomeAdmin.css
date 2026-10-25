@@ -1,0 +1,59 @@
+[class*='stats-body']{
+   
+    background:linear-gradient(360deg,#0000ff,#000099,#00001a);
+    color:white;
+    border:2px solid #003d66;
+    padding:1%;
+    box-sizing: border-box;
+    
+}
+
+[class*='stats-body']:hover{
+    height:250px;
+    width:55%;
+    background:linear-gradient(360deg,#8822aa,#8822aa,#00001a);
+    color:#4dff4d
+}
+
+.stats-body1{
+    height:200px;
+    width:20%
+
+}
+
+.stats-body2{
+    height:120px;
+    width:15%
+}
+
+.stats-body3{
+    height:165px;
+    width:30%
+}
+
+.stats-body4{
+    height:130px;
+    width:26%
+}
+
+.stats-content{
+    margin:5% auto;
+    width:80%;
+
+}
+
+
+.admin-home-content{
+ background:linear-gradient(180deg,#000033,#00001a,#000000); 
+ height:fit-content;
+ color:white
+}
+
+[class*='stats-row']
+{
+    display: flex;
+    justify-content: space-between;
+   
+    
+   
+}

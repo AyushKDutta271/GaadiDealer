@@ -130,7 +130,10 @@ navigate(`/viewACar/${carId}`)
           <div className="carousel-inner">
             {
               cars.map((car,idx)=>{
+                  if(idx<=4)
+                  {
                 return (
+                    
                     <div className={idx===0?"carousel-item active":"carousel-item"} data-bs-interval="10000" key={car.id}>
                             
                       <img src={car.carImages[0]} style={{height:"400px",width:"100%",objectFit:"cover", borderRadius:"8px"}} className="d-block w-100" alt="..."/>
@@ -143,6 +146,7 @@ navigate(`/viewACar/${carId}`)
                     </div>
                     
                 )
+              }
               })
             }
           </div>

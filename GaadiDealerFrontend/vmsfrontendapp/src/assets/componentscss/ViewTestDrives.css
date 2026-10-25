@@ -1,0 +1,17 @@
+.test-drive-row:hover{
+    background: linear-gradient(160deg,#92753a,#493a1d,#120f07);
+}
+
+.table-body{
+    background: linear-gradient(135deg,#0f1d24,#162c37,#162c37);
+    margin:5% auto;
+    border-radius: 15px;
+    box-sizing: border-box;
+    box-shadow: 20px,30px,15px,15px,#ffffe5;
+}
+
+.test-drive-row{
+    border:2px solid blueviolet;
+    border-radius:35px;
+
+}

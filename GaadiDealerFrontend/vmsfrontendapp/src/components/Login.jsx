@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import instance from '../axiosConfig';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import '../assets/componentscss/SellVehicle.css'
 
 const Login = () => {
 
@@ -123,12 +124,12 @@ const Login = () => {
         }
   return (
     <>
-    <div>
+    <div className='homeUser-body' style={{height:'900px'}}> 
      
-     <div>Login Form</div>
+     <h3 align='center'> User Login:</h3>
 
         <div>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={submitHandler} className='form-body'>
             
             <div class="mb-3">
                 <label for="exampleFormControlInput2" class="form-label">Email Id</label>
@@ -156,9 +157,13 @@ const Login = () => {
                 <div>{
                         errors.userTypeError?errors.userTypeError:null
                     }</div>
-
-                    <button type='submit' >Login</button>
+                <div style={{width:"80%",height:'50px',margin:"3% auto", display:'flex',justifyContent:'space-between'}}>
+                    <button type='submit' className=' btn btn-primary' style={{width:'100%'}}>Login</button>
+                     <h6 align='right' style={{marginTop:'0%'}}>Not a user yet?<Link to='/register'>Register</Link></h6>
+                </div>
+                 
         </form>
+       
         {
             finalError?<h3>{finalError}</h3>:null
         }

@@ -1,0 +1,11 @@
+.payment-body-content{
+    width:50%;
+    margin:10% auto
+}
+
+.payment-details-body{
+    background: linear-gradient(120deg,#3366cc,#24478f,#1f3d7a);
+    border-radius:15px;
+    width: 100%;
+    margin:0 auto
+}
