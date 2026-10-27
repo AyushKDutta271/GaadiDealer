@@ -17,7 +17,7 @@ const ViewTestDrives = () => {
             fetchTestDrives();
             fetchCar();
             fetchLeads();
-            
+            fetchLoggedInUser();
             console.log(testDrives);
             console.log(cars);
             console.log("fetched leads: ",leads);
@@ -25,7 +25,15 @@ const ViewTestDrives = () => {
         [location]
     );
 
-    
+const fetchLoggedInUser=async ()=>{
+   const emailId= await instance.get('/me');
+   const user=await instance.get('/users/getUserByEmailId',{
+    params:{
+        emailId:emailId.data
+    }
+   });
+   setLoggedInUser(user.data);
+}
    
     const fetchTestDrives=async ()=>{
              const email=  await instance.get('/me');
@@ -154,7 +162,7 @@ const ViewTestDrives = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between" style={{width:"80%"}}>
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                                <Link className="nav-link active" aria-current="page" to="/user">Home</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to='/sellVehicle'>Sell Vehicle</Link>
@@ -171,9 +179,13 @@ const ViewTestDrives = () => {
                             </li>
                             
                         </ul>  
-                        <div className="nav-item" style={{marginRight:"5%",border:"2px solid black"}}>
-                                <a className="nav-link" href="#">Profile</a>
-                        </div> 
+                       <div className="nav-item" style={{marginRight:"7%",width:"7%",height:'70px',backgroundColor:'black',borderRadius:'100%', position:'relative'}}>
+                            <div className='nav-link ' id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style={{margin:"25% auto",width:'100%',borderRadius:'125px',color:'blue'}}>{loggedInUser?<p align='center' style={{fontSize:'23px'}}><strong>{loggedInUser.userType.charAt(0)}</strong></p>:<p>...</p>}</div>
+                            <ul className="dropdown-menu" style={{position:'absolute',top:'100%',right:'50%', marginRight:'50px'} } aria-labelledby="navbarDropdown">
+            
+                                <li onClick={async()=>{await instance.post('/userlogout'); navigate('/login') }}><p className="dropdown-item" >Logout</p></li>
+                            </ul>
+                    </div> 
                     </div>
                 </div>
              </nav>

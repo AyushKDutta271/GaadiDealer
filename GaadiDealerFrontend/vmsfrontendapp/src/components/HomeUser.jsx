@@ -10,10 +10,11 @@ const HomeUser = () => {
 const location=useNavigate();
 const [cars,setCars]=useState([]);
 const [offerNotification,setOfferNotification]=useState(false);
-
+ const [loggedInUser,setLoggedInUser]=useState(null);
 useEffect(
     ()=>{
        fetchCars();
+       fetchLoggedInUser();
        const tId=setTimeout(()=>{
         setOfferNotification(true);
        },3000);
@@ -26,6 +27,15 @@ useEffect(
 );
 
 
+const fetchLoggedInUser=async ()=>{
+   const emailId= await instance.get('/me');
+   const user=await instance.get('/users/getUserByEmailId',{
+    params:{
+        emailId:emailId.data
+    }
+   });
+   setLoggedInUser(user.data);
+}
 const crossDisplayOff=()=>{
   setOfferNotification(false);
 }
@@ -65,7 +75,7 @@ navigate(`/viewACar/${carId}`)
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between" style={{width:"80%"}}>
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Home</a>
+                           <Link className="nav-link active" aria-current="page" to="/user">Home</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to='/sellVehicle'>Sell Vehicle</Link>
@@ -78,40 +88,21 @@ navigate(`/viewACar/${carId}`)
                             <Link className="nav-link" to='/viewTestDrives' >TestDrives</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" href="#" >Contact Info</Link>
+                            <Link className="nav-link" >Contact Info</Link>
                         </li>
                         
                     </ul>  
-                    <div className="nav-item" style={{marginRight:"5%",border:"2px solid black"}}>
-                            <a className="nav-link" href="#">Profile</a>
+                    <div className="nav-item" style={{marginRight:"7%",width:"7%",height:'70px',backgroundColor:'black',borderRadius:'100%', position:'relative'}}>
+                            <div className='nav-link ' id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style={{margin:"25% auto",width:'100%',borderRadius:'125px',color:'blue'}}>{loggedInUser?<p align='center' style={{fontSize:'23px'}}><strong>{loggedInUser.userType.charAt(0)}</strong></p>:<p>...</p>}</div>
+                            <ul className="dropdown-menu" style={{position:'absolute',top:'100%',right:'50%', marginRight:'50px'} } aria-labelledby="navbarDropdown">
+            
+                                <li onClick={async()=>{await instance.post('/userlogout'); navigate('/login') }}><p className="dropdown-item" >Logout</p></li>
+                            </ul>
                     </div> 
                 </div>
             </div>
          </nav>
         
-        {/* <div>
-          {
-            cars.map((car,idx)=>{
-              return (
-                <div key={car.id}>
-                  <div>
-                    <img src={car.carImages[0]} style={{height:"200px",width:"100%",objectFit:"cover", borderRadius:"8px"}}/>
-                  </div>
-
-                  <div>
-                      <p>{car.carBrand}</p>
-                      <p>{car.carPlateNo}</p>
-                      <p>{car.price}</p>
-                      {
-                        carDescs[idx]
-                      }
-                  </div>
-                </div>
-              )
-             
-            })
-          }
-        </div>    */}
         
       <div className='home-content-body' >
         
@@ -171,7 +162,7 @@ navigate(`/viewACar/${carId}`)
       
 
 
-      <div className='footer-body'>
+      <div className='footer-body' id='footer'>
       <div>
             <h3><i class="fa-duotone fa-solid fa-address-book"></i>Address:</h3>
             <p>Ayush Kamal Dutta</p>

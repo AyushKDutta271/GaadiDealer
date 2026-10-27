@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../assets/componentscss/SellVehicle.css'
 import instance from '../axiosConfig';
 import axios from 'axios';
@@ -8,6 +8,8 @@ const SellVehicle = () => {
     const location=useLocation();
     const [backendError,setBackendError]=useState(null);
     const [loggedInUser,setLoggedInUser]=useState(null);
+
+    const navigate=useNavigate();
     useEffect(
         ()=>{
             fetchLoggedInUser();
@@ -240,7 +242,7 @@ const SellVehicle = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between" style={{width:"80%"}}>
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Home</a>
+                            <Link className="nav-link active" aria-current="page" to="/user">Home</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to='/sellVehicle'>Sell Vehicle</Link>
@@ -257,8 +259,12 @@ const SellVehicle = () => {
                         </li>
                         
                     </ul>  
-                    <div className="nav-item" style={{marginRight:"5%",border:"2px solid black"}}>
-                            <a className="nav-link" href="#">Profile</a>
+                    <div className="nav-item" style={{marginRight:"7%",width:"7%",height:'70px',backgroundColor:'black',borderRadius:'100%', position:'relative'}}>
+                            <div className='nav-link ' id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style={{margin:"25% auto",width:'100%',borderRadius:'125px',color:'blue'}}>{loggedInUser?<p align='center' style={{fontSize:'23px'}}><strong>{loggedInUser.userType.charAt(0)}</strong></p>:<p>...</p>}</div>
+                            <ul className="dropdown-menu" style={{position:'absolute',top:'100%',right:'50%', marginRight:'50px'} } aria-labelledby="navbarDropdown">
+            
+                                <li onClick={async()=>{await instance.post('/userlogout'); navigate('/login') }}><p className="dropdown-item" >Logout</p></li>
+                            </ul>
                     </div> 
                 </div>
             </div>

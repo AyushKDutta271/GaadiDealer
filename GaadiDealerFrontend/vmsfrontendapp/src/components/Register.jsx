@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import instance from '../axiosConfig';
 // import '../assets/componentscss/SellVehicle.css'
 const Register = () => {
     const [formInputs,setFormInputs]=useState({
@@ -124,7 +125,7 @@ const Register = () => {
         })
     };
 
-    const submitHandler=(e)=>{
+    const submitHandler=async (e)=>{
         e.preventDefault();
 
         if(errors.fullNameError!=='' && errors.emailError!=='' && errors.passwordError!=='' && errors.confirmPasswordError!=='' && errors.stateError!=='' && errors.cityError!=='' && errors.userTypeError!=='')
@@ -135,7 +136,17 @@ const Register = () => {
         else
         {
             setFinalError(null);
+            await instance.post('/users/register',{
+                'fullName':formInputs.fullname,
+                'emailId':formInputs.email,
+                'password':formInputs.password,
+                'confirmPassword':formInputs.confirmpassword,
+                'userState':formInputs.state,
+                'userCity':formInputs.city,
+                'userType':formInputs.usertype.toUpperCase()
+            })
             setSuccessMessage("Registered Successfully!");
+
         }
         
 
@@ -158,7 +169,7 @@ const Register = () => {
                 <label for="exampleFormControlInput2" class="form-label">Email Id</label>
                 <input type="email" class="form-control" id="exampleFormControlInput2" name='email' value={formInputs.email} onChange={formInputsHandler}/>
             </div>
-                <div>{
+                <div >{
                         errors.emailError?errors.emailError:null
                     }</div>
             <div class="mb-3">
@@ -207,10 +218,10 @@ const Register = () => {
                     
         </form>
         {
-            finalError?<h3>{finalError}</h3>:null
+            finalError?<h3 align='center'>{finalError}</h3>:null
         }
         {
-            successMessage?<h3>{successMessage}</h3>:null
+            successMessage?<h3 align='center'>{successMessage}</h3>:null
         }
       </div>
     </>

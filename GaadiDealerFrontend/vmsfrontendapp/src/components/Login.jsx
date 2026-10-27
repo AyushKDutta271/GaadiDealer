@@ -165,10 +165,10 @@ const Login = () => {
         </form>
        
         {
-            finalError?<h3>{finalError}</h3>:null
+            finalError?<h3 align='center' color='red'>{finalError}</h3>:null
         }
         {
-            successMessage?<h3>{successMessage}</h3>:null
+            successMessage?<h3 align='center' color='green'>{successMessage}</h3>:null
         }
         {
             successMessage?<Navigate to='/'/>:null

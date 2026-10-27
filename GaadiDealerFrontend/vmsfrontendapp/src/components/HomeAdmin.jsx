@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import instance from '../axiosConfig';
 import '../assets/componentscss/HomeAdmin.css'
 
@@ -28,6 +28,8 @@ useEffect(
     },
     [location]
 );
+
+const navigate=useNavigate();
 const fetchLoggedInUser=async ()=>{
    const emailId= await instance.get('/me');
    const user=await instance.get('/users/getUserByEmailId',{
@@ -88,7 +90,7 @@ const fetchAllTestDrives=async()=>{
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between" style={{border:"2px solid black",width:"80%"}}>
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between" style={{width:"80%"}}>
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to='/admin'>Home</Link>
                         </li>
@@ -109,8 +111,12 @@ const fetchAllTestDrives=async()=>{
                         </li>
                         
                     </ul>  
-                    <div className="nav-item" style={{marginRight:"3%",width:"10%",height:'30px',backgroundColor:'palegreen'}}>
-                            <Link className="nav-link" to='/admin' style={{margin:"3% auto",width:'8%',borderRadius:'100%'}}>{loggedInUser?<p><strong>{loggedInUser.fullName.charAt(0)}</strong></p>:<p>...</p>}</Link>
+                    <div className="nav-item" style={{marginRight:"7%",width:"7%",height:'70px',backgroundColor:'black',borderRadius:'100%', position:'relative'}}>
+                            <div className='nav-link ' id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style={{margin:"25% auto",width:'100%',borderRadius:'125px',color:'blue'}}>{loggedInUser?<p align='center' style={{fontSize:'23px'}}><strong>{loggedInUser.userType.charAt(0)}</strong></p>:<p>...</p>}</div>
+                            <ul className="dropdown-menu" style={{position:'absolute',top:'100%',right:'50%', marginRight:'50px'} } aria-labelledby="navbarDropdown">
+            
+                                <li onClick={async()=>{await instance.post('/userlogout'); navigate('/login') }}><p className="dropdown-item" >Logout</p></li>
+                            </ul>
                     </div> 
                 </div>
             </div>
